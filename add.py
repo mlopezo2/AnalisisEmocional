@@ -1,4 +1,5 @@
 import streamlit as st
+from textblob import TextBlob
 from PIL import Image
 import pandas as pd
 import os
