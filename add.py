@@ -17,13 +17,13 @@ image = Image.open("FeelingsWheel.png")
 st.image(image, caption="Rueda de emociones")
 
 st.subheader("Guía Inicial")
-  st.write("¿Cómo te sientes hoy?")
-  resp1 = st.checkbox("Alegría")
-  resp2 = st.checkbox("Tristeza")
-  if resp1:
-    st.write("La alegría nos permite disfrutar diferentes aspectos de la vida y generar actitudes positivas frente a estos. También favorece el aprendizaje y la memoria")
-  if resp2:
-    st.write("La alegría nos permite disfrutar diferentes aspectos de la vida y generar actitudes positivas frente a estos. También favorece el aprendizaje y la memoria")
+st.write("¿Como te sientes hoy?")
+resp1 = st.checkbox("Alegría")
+resp2 = st.checkbox("Tristeza")
+if resp1:
+  st.write("La alegría nos permite disfrutar diferentes aspectos de la vida y generar actitudes positivas frente a estos. También favorece el aprendizaje y la memoria")
+if resp2:
+  st.write("La alegría nos permite disfrutar diferentes aspectos de la vida y generar actitudes positivas frente a estos. También favorece el aprendizaje y la memoria")
     
 st.subheader("¿Cómo te sientes hoy? Escribe una palabra que describa tu estado emocional.")
 
