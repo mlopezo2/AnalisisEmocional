@@ -1,3 +1,5 @@
+import streamlit as st
+from PIL import Image
 from textblob import TextBlob
 import pandas as pd
 import os
@@ -5,8 +7,6 @@ import time
 import glob
 import os
 from gtts import gTTS
-import streamlit as st
-from PIL import Image
 from googletrans import Translator
 
 st.title("Análisis Emocional")
