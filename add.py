@@ -19,13 +19,15 @@ st.subheader("Guía Inicial")
 st.write("¿Como te sientes hoy?")
 resp1 = st.checkbox("Alegría")
 resp2 = st.checkbox("Tristeza")
+resp3 = st.checkbox("Ira")
 if resp1:
   st.write("La alegría nos permite disfrutar diferentes aspectos de la vida y generar actitudes positivas frente a estos. También favorece el aprendizaje y la memoria")
 if resp2:
-  st.write("La alegría nos permite disfrutar diferentes aspectos de la vida y generar actitudes positivas frente a estos. También favorece el aprendizaje y la memoria")
+  st.write("La tristeza aumenta la cohesión con otras personas, nos permite valorar otros aspectos de la vida y fomenta la aparición de la empatía.")
+if resp3:
+  st.write("La ira moviliza la energía interior y elimina obstáculos en el camino.")
 
-
-st.subheader("¿Cómo te sientes hoy? Escribe una palabra que describa tu estado emocional.")
+st.subheader("Si no encontraste una opción que te representara, escribe una palabra que describa tu estado emocional.")
 
 translator = Translator()
 
@@ -45,4 +47,53 @@ with st.expander('Analizar texto'):
             st.write( 'Es un sentimiento Negativo 😔')
         else:
             st.write( 'Es un sentimiento Neutral 😐')
+
+try:
+    os.mkdir("temp")
+except:
+    pass
+
+st.subheader("Habla en voz alta y desahógate. Graba tu voz y escucha para procesar e interpretar desde otro punto de vista tus emociones.")
+
+text = st.text_input("¿Desea escuchar la información?")
+
+tld="es"
+
+def text_to_speech(text, tld):
+    
+    tts = gTTS(text,"es", tld, slow=False)
+    try:
+        my_file_name = text[0:20]
+    except:
+        my_file_name = "audio"
+    tts.save(f"temp/{my_file_name}.mp3")
+    return my_file_name, text
+
+
+#display_output_text = st.checkbox("Verifica el texto")
+
+if st.button("Escuchar"):
+    result, output_text = text_to_speech(text, tld)
+    audio_file = open(f"temp/{result}.mp3", "rb")
+    audio_bytes = audio_file.read()
+    st.markdown(f"## Tú audio:")
+    st.audio(audio_bytes, format="audio/mp3", start_time=0)
+
+    #if display_output_text:
+    st.markdown(f"## Texto en audio:")
+    st.write(f" {output_text}")
+
+
+def remove_files(n):
+    mp3_files = glob.glob("temp/*mp3")
+    if len(mp3_files) != 0:
+        now = time.time()
+        n_days = n * 86400
+        for f in mp3_files:
+            if os.stat(f).st_mtime < now - n_days:
+                os.remove(f)
+                print("Deleted ", f)
+
+
+remove_files(7)
 
